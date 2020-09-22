@@ -1,10 +1,10 @@
-package org.st.community.community.provider;
+package org.st.community.provider;
 
 import com.alibaba.fastjson.JSON;
 import okhttp3.*;
 import org.springframework.stereotype.Component;
-import org.st.community.community.dto.AccessTokenDTO;
-import org.st.community.community.dto.GithubUser;
+import org.st.community.dto.AccessTokenDTO;
+import org.st.community.dto.GithubUser;
 
 import java.io.IOException;
 

@@ -1,13 +1,13 @@
-package org.st.community.community.controller;
+package org.st.community.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.st.community.community.dto.AccessTokenDTO;
-import org.st.community.community.dto.GithubUser;
-import org.st.community.community.provider.GithubProvider;
+import org.st.community.dto.AccessTokenDTO;
+import org.st.community.dto.GithubUser;
+import org.st.community.provider.GithubProvider;
 
 /**
  * Created with IntelliJ IDEA.
