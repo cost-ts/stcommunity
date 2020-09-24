@@ -15,10 +15,11 @@ public class IndexController {
 
     /**
      * 访问根目录 /
+     *
      * @return index页面
      */
     @GetMapping("/")
-    public String index(){
+    public String index() {
         return "index";
     }
 }

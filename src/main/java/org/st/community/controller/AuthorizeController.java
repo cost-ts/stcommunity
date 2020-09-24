@@ -24,7 +24,7 @@ public class AuthorizeController {
 
     @Autowired
     private GithubProvider githubProvider;
-    
+
     @Value("${github.client.id}")
     private String clientId;
     @Value("${github.client.secret}")
@@ -50,7 +50,7 @@ public class AuthorizeController {
             // 写入session并返回首页
             request.getSession().setAttribute("user", user);
             return "redirect:/";
-        }else {
+        } else {
             // 返回登录页
             return "redirect:/";
         }
