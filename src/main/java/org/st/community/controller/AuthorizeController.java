@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.st.community.dto.AccessTokenDTO;
 import org.st.community.dto.GithubUser;
 import org.st.community.provider.GithubProvider;
+import org.st.community.utils.ObjectUtils;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,7 +34,8 @@ public class AuthorizeController {
 
     @GetMapping("/callback")
     public String callBack(@RequestParam(name = "code") String code,
-                           @RequestParam(name = "state") String state
+                           @RequestParam(name = "state") String state,
+                           HttpServletRequest request
     ) {
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(clientId);
@@ -41,7 +45,14 @@ public class AuthorizeController {
         accessTokenDTO.setState(state);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         GithubUser user = githubProvider.getUser(accessToken);
-        System.out.println(user);
-        return "index";
+        // 将用户信息写入session
+        if (ObjectUtils.isNotNull(user)) {
+            // 写入session并返回首页
+            request.getSession().setAttribute("user", user);
+            return "redirect:/";
+        }else {
+            // 返回登录页
+            return "redirect:/";
+        }
     }
 }
