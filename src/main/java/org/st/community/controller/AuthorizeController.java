@@ -13,6 +13,7 @@ import org.st.community.provider.GithubProvider;
 import org.st.community.utils.ObjectUtils;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.UUID;
 
 /**
  * Created with IntelliJ IDEA.
@@ -49,12 +50,15 @@ public class AuthorizeController {
         accessTokenDTO.setState(state);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         GithubUser githubUser = githubProvider.getUser(accessToken);
-        System.out.println(githubUser);
         // 将用户信息写入session
         if (ObjectUtils.isNotNull(githubUser)) {
             // 将用户信息写入数据库
             User user = new User();
+            user.setToken(UUID.randomUUID().toString());
             user.setName(githubUser.getName());
+            user.setAccountId(String.valueOf(githubUser.getId()));
+            user.setGmtCreate(System.currentTimeMillis());
+            user.setGmtModified(user.getGmtCreate());
             user.setBio(githubUser.getBio());
             userMapper.insertUser(user);
             // 写入session并返回首页

@@ -7,6 +7,7 @@ import org.st.community.dto.AccessTokenDTO;
 import org.st.community.dto.GithubUser;
 
 import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created with IntelliJ IDEA.
@@ -54,7 +55,11 @@ public class GithubProvider {
      */
     public GithubUser getUser(String token) {
 
-        OkHttpClient okHttpClient = new OkHttpClient();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                // 设置超时
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
+                .build();
 
         Request request = new Request.Builder()
                 .url("https://api.github.com/user?access_token=" + token)

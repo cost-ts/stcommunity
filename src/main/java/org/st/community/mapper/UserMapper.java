@@ -16,7 +16,7 @@ import org.st.community.model.User;
 @Component
 public interface UserMapper {
 
-    @Insert("INSERT INTO USER(name, account_id, token, gmt_create, gmt_modified) " +
-            "VALUES (#{name}, #{accountId}, #{token}, #{gmtCreate}, #{gmtModified})")
+    @Insert("INSERT INTO USER(name, account_id, bio, token, gmt_create, gmt_modified) " +
+            "VALUES (#{name}, #{accountId}, #{bio}, #{token}, #{gmtCreate}, #{gmtModified})")
     void insertUser(User user);
 }
