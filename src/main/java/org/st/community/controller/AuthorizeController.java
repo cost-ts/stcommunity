@@ -12,15 +12,16 @@ import org.st.community.model.User;
 import org.st.community.provider.GithubProvider;
 import org.st.community.utils.ObjectUtils;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.util.UUID;
 
 /**
  * Created with IntelliJ IDEA.
- * Description: 授权回调页面
- * User: ST
- * Date: 2020-09-04
- * Time: 0:21
+ *
+ * @Description: 授权回调页面
+ * @author: ST
+ * @Date: 2020-09-04 0:21
  */
 @Controller
 public class AuthorizeController {
@@ -40,8 +41,9 @@ public class AuthorizeController {
     @GetMapping("/callback")
     public String callBack(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
-                           HttpServletRequest request
+                           HttpServletResponse response
     ) {
+        // 填充token
         AccessTokenDTO accessTokenDTO = new AccessTokenDTO();
         accessTokenDTO.setClient_id(clientId);
         accessTokenDTO.setClient_secret(secret);
@@ -54,15 +56,16 @@ public class AuthorizeController {
         if (ObjectUtils.isNotNull(githubUser)) {
             // 将用户信息写入数据库
             User user = new User();
-            user.setToken(UUID.randomUUID().toString());
+            String token = UUID.randomUUID().toString();
+            user.setToken(token);
             user.setName(githubUser.getName());
             user.setAccountId(String.valueOf(githubUser.getId()));
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             user.setBio(githubUser.getBio());
             userMapper.insertUser(user);
-            // 写入session并返回首页
-            request.getSession().setAttribute("githubUser", githubUser);
+            // 将token写入cookie中
+            response.addCookie(new Cookie("token", token));
             return "redirect:/";
         } else {
             // 返回登录页

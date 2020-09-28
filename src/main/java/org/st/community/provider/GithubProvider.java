@@ -11,10 +11,11 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * Created with IntelliJ IDEA.
- * Description: Github授权支持 - 获取token
- * User: ST
- * Date: 2020-09-04
- * Time: 0:35
+ *
+ * @Description: Github授权支持 - 获取token
+ * @author: ST
+ * @Date: 2020-09-04
+ * @Time: 0:35
  */
 @Component
 public class GithubProvider {
@@ -27,7 +28,11 @@ public class GithubProvider {
     public String getAccessToken(AccessTokenDTO accessTokenDTO) {
 
         MediaType mediaType = MediaType.get("application/json; charset=utf8");
-        OkHttpClient okHttpClient = new OkHttpClient();
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                // 设置超时
+                .connectTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(20, TimeUnit.SECONDS)
+                .build();
 
         RequestBody body = RequestBody.create(mediaType, JSON.toJSONString(accessTokenDTO));
         Request request = new Request.Builder()
@@ -55,11 +60,7 @@ public class GithubProvider {
      */
     public GithubUser getUser(String token) {
 
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                // 设置超时
-                .connectTimeout(10, TimeUnit.SECONDS)
-                .readTimeout(20, TimeUnit.SECONDS)
-                .build();
+        OkHttpClient okHttpClient = new OkHttpClient();
 
         Request request = new Request.Builder()
                 .url("https://api.github.com/user?access_token=" + token)

@@ -4,10 +4,10 @@ import lombok.Data;
 
 /**
  * Created with IntelliJ IDEA.
- * Description: 用户实体类
- * User: ST
- * Date: 2020-09-25
- * Time: 14:12
+ * @Description: 用户实体类
+ * @author: ST
+ * @Date: 2020-09-25
+ * @Time: 14:12
  */
 @Data
 public class User {

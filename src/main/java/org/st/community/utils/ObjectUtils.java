@@ -1,16 +1,19 @@
 package org.st.community.utils;
 
+import com.google.common.collect.Maps;
+
 import java.util.List;
 import java.util.Map;
 
-import com.google.common.collect.Maps;
-
-
 /**
- * 工具类
+ * Created with IntelliJ IDEA.
  *
  * @version 1.0
- * @since JDK1.7
+ * @Description: 工具类
+ * @author: ST
+ * @Date: 2020-09-01
+ * @Time: 23:52
+ * @since JDK1.8
  */
 public class ObjectUtils {
 

@@ -4,10 +4,10 @@ import lombok.Data;
 
 /**
  * Created with IntelliJ IDEA.
- * Description: 获取Github token所需要的参数
- * User: ST
- * Date: 2020-09-04
- * Time: 0:39
+ * @Description: 获取Github token所需要的参数(这里变量名为Github规定格式,不可以变更)
+ * @author: ST
+ * @Date: 2020-09-04
+ * @Time: 0:39
  */
 @Data
 public class AccessTokenDTO {

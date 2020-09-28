@@ -4,10 +4,10 @@ import lombok.Data;
 
 /**
  * Created with IntelliJ IDEA.
- * Description: 获取到的Github信息
- * User: ST
- * Date: 2020-09-04
- * Time: 1:30
+ * @Description: 获取到的Github信息
+ * @author: ST
+ * @Date: 2020-09-04
+ * @Time: 1:30
  */
 @Data
 public class GithubUser {
