@@ -9,6 +9,8 @@
 
 [Bootstrap 组件](https://v3.bootcss.com/components/#navbar)
 
+[Springboot 官方数据库连接池](https://docs.spring.io/spring-boot/docs/2.0.0.RC1/reference/htmlsingle/#boot-features-embedded-database-support)
+
 ---
 ### 工具
 [git](https://git-scm.com/download)

@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.st.community.dto.AccessTokenDTO;
 import org.st.community.dto.GithubUser;
+import org.st.community.mapper.UserMapper;
+import org.st.community.model.User;
 import org.st.community.provider.GithubProvider;
 import org.st.community.utils.ObjectUtils;
 
@@ -24,6 +26,8 @@ public class AuthorizeController {
 
     @Autowired
     private GithubProvider githubProvider;
+    @Autowired
+    private UserMapper userMapper;
 
     @Value("${github.client.id}")
     private String clientId;
@@ -44,11 +48,17 @@ public class AuthorizeController {
         accessTokenDTO.setRedirect_uri(uri);
         accessTokenDTO.setState(state);
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
-        GithubUser user = githubProvider.getUser(accessToken);
+        GithubUser githubUser = githubProvider.getUser(accessToken);
+        System.out.println(githubUser);
         // 将用户信息写入session
-        if (ObjectUtils.isNotNull(user)) {
+        if (ObjectUtils.isNotNull(githubUser)) {
+            // 将用户信息写入数据库
+            User user = new User();
+            user.setName(githubUser.getName());
+            user.setBio(githubUser.getBio());
+            userMapper.insertUser(user);
             // 写入session并返回首页
-            request.getSession().setAttribute("user", user);
+            request.getSession().setAttribute("githubUser", githubUser);
             return "redirect:/";
         } else {
             // 返回登录页
