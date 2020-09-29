@@ -82,6 +82,7 @@
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.21</version>
         </dependency>
 
         <dependency>
@@ -102,6 +103,25 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <!--  flyway + mysql (仅供学习,并未使用) -->
+            <plugin>
+                <groupId>org.flywaydb</groupId>
+                <artifactId>flyway-maven-plugin</artifactId>
+                <version>7.0.0</version>
+                <configuration>
+                    <url>jdbc:mysql://localhost:3306/bsma?useUnicode=true&amp;characterEncoding=utf8&amp;serverTimezone=GMT%2B8&amp;useSSL=false</url>
+                    <user>root</user>
+                    <password>123456</password>
+                </configuration>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>8.0.21</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
