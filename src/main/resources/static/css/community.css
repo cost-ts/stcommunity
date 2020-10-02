@@ -1,0 +1,19 @@
+body {
+    background-color: #efefef;
+}
+
+.main {
+    border-radius: 10px;
+    background-color: white;
+    margin: 25px;
+}
+
+.questionDiv{
+    margin-left: 10px;
+    width: 74%;
+}
+
+.btn-publish{
+    float: right;
+    margin-bottom: 15px;
+}
