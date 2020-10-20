@@ -38,6 +38,13 @@ public class AuthorizeController {
     @Value("${github.redirect.uri}")
     private String uri;
 
+    /**
+     * 回调/callback获取token
+     * @param code  返回的code
+     * @param state 状态码
+     * @param response http响应
+     * @return
+     */
     @GetMapping("/callback")
     public String callBack(@RequestParam(name = "code") String code,
                            @RequestParam(name = "state") String state,
@@ -53,7 +60,7 @@ public class AuthorizeController {
         String accessToken = githubProvider.getAccessToken(accessTokenDTO);
         GithubUser githubUser = githubProvider.getUser(accessToken);
         // 将用户信息写入session
-        if (ObjectUtils.isNotNull(githubUser)) {
+        if (ObjectUtils.isNotNull(githubUser) && ObjectUtils.isNotNull(githubUser.getId())) {
             // 将用户信息写入数据库
             User user = new User();
             String token = UUID.randomUUID().toString();
