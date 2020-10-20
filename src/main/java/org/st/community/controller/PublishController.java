@@ -62,6 +62,12 @@ public class PublishController {
             HttpServletRequest request,
             Model model
     ) {
+
+        // 排查报错
+        model.addAttribute("title",title);
+        model.addAttribute("description", description);
+        model.addAttribute("tag", tag);
+
         // 判断用户是否登录
         User user = null;
 
