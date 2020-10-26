@@ -28,7 +28,7 @@ public class User {
      */
     private String token;
     /**
-     * url
+     * 用户头像
      */
     private String avatarUrl;
     /**
