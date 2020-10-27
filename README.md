@@ -13,6 +13,8 @@
 
 [flyway - database migrations](https://flywaydb.org/)
 
+[thymeleaf - doc](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html)
+
 ---
 ### 工具
 [git](https://git-scm.com/download)
