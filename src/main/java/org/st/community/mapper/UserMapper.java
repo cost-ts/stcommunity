@@ -9,6 +9,7 @@ import org.st.community.model.User;
 
 /**
  * Created with IntelliJ IDEA.
+ *
  * @Description: 用户类操作mapper接口
  * @author: ST
  * @Date: 2020-09-25
@@ -20,6 +21,7 @@ public interface UserMapper {
 
     /**
      * 保存用户信息
+     *
      * @param user 用户
      */
     @Insert("INSERT INTO USER(name, account_id, bio, token, gmt_create, gmt_modified, avatar_url) " +
@@ -28,9 +30,19 @@ public interface UserMapper {
 
     /**
      * 通过token查询用户信息
+     *
      * @param token 令牌
      * @return User对象
      */
     @Select("SELECT * FROM USER WHERE token = #{token}")
     User findByToken(@Param("token") String token);
+
+    /**
+     * 通过id查询用户信息
+     *
+     * @param id
+     */
+    @Select("SELECT id, account_id, name, gmt_create, gmt_modified, bio, avatar_url FROM USER " +
+            "WHERE id = #{id}")
+    User selectById(Integer id);
 }

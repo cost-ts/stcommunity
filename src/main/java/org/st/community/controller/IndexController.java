@@ -2,14 +2,18 @@ package org.st.community.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.st.community.dto.QuestionDTO;
 import org.st.community.mapper.UserMapper;
 import org.st.community.model.User;
+import org.st.community.service.QuestionService;
 import org.st.community.utils.ObjectUtils;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,6 +28,8 @@ public class IndexController {
 
     @Autowired
     private UserMapper userMapper;
+    @Autowired
+    private QuestionService questionService;
 
     private final String TOKEN = "token";
 
@@ -34,8 +40,7 @@ public class IndexController {
      * @return index页面
      */
     @GetMapping("/")
-    public String index(HttpServletRequest request) {
-
+    public String index(HttpServletRequest request, Model model) {
         Cookie[] cookies = request.getCookies();
         if (ObjectUtils.isNotNull(cookies)) {
             for (Cookie cookie : cookies) {
@@ -57,6 +62,12 @@ public class IndexController {
                     break;
                 }
             }
+        }
+        // 查询所有问题
+        List<QuestionDTO> questions = questionService.selectList();
+        if (ObjectUtils.isNotNull(questions)) {
+            // 分装到model中返回index页面
+            model.addAttribute("questions", questions);
         }
         return "index";
     }

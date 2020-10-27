@@ -4,6 +4,7 @@ import lombok.Data;
 
 /**
  * Created with IntelliJ IDEA.
+ *
  * @Description: 获取到的Github信息
  * @author: ST
  * @Date: 2020-09-04
@@ -26,5 +27,5 @@ public class GithubUser {
     /**
      * 用户头像
      */
-    private String avatar_url;
+    private String avatarUrl;
 }

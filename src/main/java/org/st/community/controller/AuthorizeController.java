@@ -40,10 +40,11 @@ public class AuthorizeController {
 
     /**
      * 回调/callback获取token
-     * @param code  返回的code
-     * @param state 状态码
+     *
+     * @param code     返回的code
+     * @param state    状态码
      * @param response http响应
-     * @return
+     * @return 返回首页
      */
     @GetMapping("/callback")
     public String callBack(@RequestParam(name = "code") String code,
@@ -70,7 +71,7 @@ public class AuthorizeController {
             user.setGmtCreate(System.currentTimeMillis());
             user.setGmtModified(user.getGmtCreate());
             user.setBio(githubUser.getBio());
-            user.setAvatarUrl(githubUser.getAvatar_url());
+            user.setAvatarUrl(githubUser.getAvatarUrl());
             userMapper.insertUser(user);
             // 将token写入cookie中
             response.addCookie(new Cookie("token", token));
